@@ -40,7 +40,34 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = Book::create([
+            "name" => $request->name,
+            "isbn" => $request->isbn,
+            "authors" => $request->authors,
+            "country" => $request->country,
+            "number_of_pages" => $request->number_of_pages,
+            "publisher" => $request->publisher,
+            "release_date" => $request->release_date
+        ]);
+
+            return Response([
+                "status_code" => 201,
+                "status" => "success",
+                "data" =>[
+                    "books" =>[
+                        "name" => $book->name,
+                        "isbn" => $book->isbn,
+                        "authors" => [
+                            $book->authors
+                        ],
+                        "country" => $book->country,
+                        "number_of_pages" => $book->number_of_pages,
+                        "publisher" => $book->publisher,
+                        "release_date" => $book->release_date
+                    ]
+                ]                
+                
+            ], 201);
     }
 
     /**
