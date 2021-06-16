@@ -101,7 +101,22 @@ class BooksController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update([
+            "name" => $request->name,
+            "isbn" => $request->isbn,
+            "authors" => $request->authors,
+            "country" => $request->country,
+            "number_of_pages" => $request->number_of_pages,
+            "publisher" => $request->publisher,
+            "release_date" => $request->release_date
+        ]);
+
+        return Response([
+            "status_code" => 200,
+            "status" => "success",
+            "message" => "The book '{$book->name}' was updated successfully",
+            "data" =>  new BooksResource($book)
+        ], 200);
     }
 
     /**
