@@ -127,6 +127,13 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return Response([
+            "status_code" => 204,
+            "status" => "success",
+            "message" => "The book '{$book->name}' was deleted successfully",
+            "data" =>  []
+        ]);
     }
 }
