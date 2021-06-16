@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 //ROUTE to Consume External Api
 Route::get('/external-books/{nameOfABook}', [App\Http\Controllers\ExternalApi\IceAndFireApisController::class, "index"]);
-});
+
 
 //-------Route for BOOK API for CRUD
 Route::prefix("v1")->group(function(){
