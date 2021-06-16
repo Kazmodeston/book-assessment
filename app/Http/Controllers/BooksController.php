@@ -78,7 +78,11 @@ class BooksController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return [
+                "status_code" => 200,
+                "status" => "success",
+                "data" =>  new BooksResource($book)
+        ];
     }
 
     /**
