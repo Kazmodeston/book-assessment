@@ -206,6 +206,6 @@ http://127.0.0.1:8000/api/v1/books/{id}
 
 This will test the codes even before checking using Client tool like `Postman`, run this code below:
 
-````
+```
 ./vendor/bin/phpunit.bat
 ```
