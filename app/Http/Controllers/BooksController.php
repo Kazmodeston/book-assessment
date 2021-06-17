@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Http\Resources\BooksResource;
+use App\Http\Requests\BooksRequest;
+use Validator;
 
 class BooksController extends Controller
 {
@@ -40,6 +42,22 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = array(
+            "name" => "required|unique:books|max:200",
+            "isbn" => "required|max:200",
+            "authors" => "required|max:200",
+            "country" => "required|max:200",
+            "number_of_pages" => "required|integer",
+            "publisher" => "required|max:200",
+            "release_date" => "required|max:200"
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails())
+        {
+            return response($validator->errors(), 422);
+        }
+        
         $book = Book::create([
             "name" => $request->name,
             "isbn" => $request->isbn,
@@ -105,6 +123,22 @@ class BooksController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $rules = array(
+            "name" => "required|unique:books|max:200",
+            "isbn" => "required|max:200",
+            "authors" => "required|max:200",
+            "country" => "required|max:200",
+            "number_of_pages" => "required|integer",
+            "publisher" => "required|max:200",
+            "release_date" => "required|max:200"
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails())
+        {
+            return response($validator->errors(), 422);
+        }
+
         $book->update([
             "name" => $request->name,
             "isbn" => $request->isbn,
