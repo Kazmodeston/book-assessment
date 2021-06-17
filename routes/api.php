@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// App\Http\Controllers\ExternalApi\IceAndFireApisController::class;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/* Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+*/
+
+//ROUTE to Consume External Api
+Route::get('/external-books/{nameOfABook}', [App\Http\Controllers\ExternalApi\IceAndFireApisController::class, "index"]);
+
+
+//-------Route for BOOK API for CRUD
+Route::prefix("v1")->group(function(){
+    Route::apiResource("/books", App\Http\Controllers\BooksController::class);
+});
+
